@@ -14,9 +14,18 @@ public class Main {
 		if (words.startsWith("int")) {
 			System.out.println("\tlw $s0, ");
 		} else if (words.startsWith("do {")) {
-			System.out.println("loop: ");
+			System.out.print("loop: ");
+			if (words.matches("(?i).*=.*")) {
+				System.out.println("\t=");
+			}
 		} else if (words.startsWith("} while")) {
-			System.out.println("\t, loop");
+			if (words.matches("(?i).*<.*")) {
+				System.out.print("\tblt");
+			}
+			if (words.matches("(?i).*>.*")) {
+				System.out.print("\tbne");
+			}
+			System.out.println(", loop");
 		}
 	}
 
@@ -31,6 +40,7 @@ public class Main {
 			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 			String line;
 			while ((line = bufferedReader.readLine()) != null) {
+				// System.out.println(line);
 				convertCode(line);
 			}
 			bufferedReader.close();
