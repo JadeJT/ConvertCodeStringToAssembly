@@ -1,0 +1,5 @@
+int a = 30;
+int b = 1;
+do {
+    a = b + 1;
+} while (a < 100);
